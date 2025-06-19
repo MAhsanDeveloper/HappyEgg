@@ -7,9 +7,10 @@ import Score from "./Score";
 import Scorecard from "./Scorecard";
 import HomePage from "./HomePage";
 import Magnet from "./Magnet";
+import { FaLessThanEqual } from "react-icons/fa";
 
 const SCREEN_HEIGHT = window.innerHeight;
-const TILE_COUNT = Math.floor(SCREEN_HEIGHT / 60); // More tiles on mobile
+const TILE_COUNT = Math.floor(SCREEN_HEIGHT / 50); // More tiles on mobile
 const TILE_WIDTH = Math.min(window.innerWidth * 0.2, 135);
 const TILE_HEIGHT = Math.min(window.innerHeight * 0.035, 30);
 const SCREEN_WIDTH = window.innerWidth;
@@ -24,7 +25,7 @@ const getInitialPositions = () => {
       offsetX: Math.random() * (TILE_WIDTH - 12),
     }));
     const isSharp = false;
-    const isMagnet = Math.random() < 0.05; // 5% percent chance
+    const isMagnet = Math.random() < 0.03; // 3% percent chance
     const magnet = isMagnet
       ? { offsetX: Math.random() * (TILE_WIDTH - 20) }
       : null;
@@ -79,7 +80,7 @@ const App = () => {
             () => ({ offsetX: Math.random() * (TILE_WIDTH - 12) })
           );
           const isSharp = gameTime >= 4 ? Math.random() < 0.3 : false;
-          const isMagnet = gameTime > 10 ? Math.random() < 0.06 : false; // 6 percent chance
+          const isMagnet = gameTime > 10 ? Math.random() < 0.04 : false; // 4 percent chance
           const magnet = isMagnet
             ? { offsetX: Math.random() * (TILE_WIDTH - 20) }
             : null;

@@ -29,7 +29,7 @@ const Egg = ({
   const [lastTileIndex, setLastTileIndex] = useState(null);
   const [isJumpingFromSharp, setIsJumpingFromSharp] = useState(false);
   const [blink, setBlink] = useState(false);
-  const [lives, setLocalLives] = useState(3); // local copy for visuals
+  const [lives, setLocalLives] = useState(3); 
 
   useEffect(() => {
     setEggPos({ x, y });
@@ -75,11 +75,12 @@ const Egg = ({
               playSound("gameover");
               hasPlayedGameOverSound.current = true;
               setGameOver(true);
+              updateHighScore(currentScore);
             }
             return newVal;
           });
         } else {
-          setY(tile.top - EGG_HEIGHT);
+          setY(Math.max(0, tile.top - EGG_HEIGHT));
           setVelocityY(0);
         }
         setLastTileIndex(currentTileIndex);
@@ -95,7 +96,11 @@ const Egg = ({
 
         const newVelocity = Math.min(velocityY + gravity, 7);
         setVelocityY(newVelocity);
-        setY((prevY) => prevY + newVelocity);
+       setY((prevY) => {
+  const newY = prevY + newVelocity;
+  return Math.max(0, newY); // prevents going above top
+});
+
         setLastTileIndex(null);
       }
 
@@ -166,6 +171,7 @@ const Egg = ({
         }
         setGameOver(true);
         updateHighScore(currentScore);
+        
       }
     }, 3);
 
